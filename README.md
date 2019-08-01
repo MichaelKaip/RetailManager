@@ -1,2 +1,2 @@
-# RetaiManager
+# Retail Manager
 A Retail Manager Software
