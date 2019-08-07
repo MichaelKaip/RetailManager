@@ -1,0 +1,67 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{tocloft}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{esvect}
+\usepackage{amssymb}
+\usepackage{nicefrac}
+\usepackage{cancel}
+\usepackage{polynom}
+\usepackage{stmaryrd}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Michael Kaip}
+\title{Retail Manager Documentation}
+\usepackage{fancyhdr} % Package for Headers and footers
+
+\pagestyle{fancy}
+
+% Extension for amsmath matrix environment - matrix | vector
+\makeatletter
+	\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  	\hskip -\arraycolsep
+  	\let\@ifnextchar\new@ifnextchar
+  	\array{#1}}
+\makeatother
+
+
+%Extension for roman numbers
+\newcommand{\uproman}[1]{\uppercase\expandafter{\romannumeral#1}}
+\newcommand{\lowroman}[1]{\romannumeral#1\relax}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\pagenumbering{gobble}
+\newpage
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\section{Initial Setup}
+
+\section{Creating a WebAPI with Authentification}
+
+\section{Configuring SWAGGER in the WebAPI}
+
+\section{WPF with MVVM Project Setup}
+
+\section{Dependency Injection in WPF}
+
+\section{Planning the Register}
+
+\section{SQL Database Table Creation}
+
+\section{WPF Login Form Creation}
+
+\section{Wiring up the WPF Login Form to the API}
+
+\section{Login Form Error Handling}
+
+
+\end{document}
