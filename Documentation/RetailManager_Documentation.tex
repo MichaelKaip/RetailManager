@@ -15,7 +15,7 @@
 \usepackage{stmaryrd}
 \usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \author{Michael Kaip}
-\title{Retail Manager Documentation}
+\title{Retail Manager Development Manual}
 \usepackage{fancyhdr} % Package for Headers and footers
 
 \pagestyle{fancy}
@@ -43,11 +43,166 @@
 \newpage
 \pagenumbering{arabic}
 
-\section{Initial Setup}
+\section{Introduction}
+
+\subsection{Project Summary}
+The goal of tkhis project is to build a dektop app that runs a cash register, handles inventory and manages an entire retail store. Creating and implementing a \textbf{WebAPI layer}, will allow the whole project to grow. This lauyer will be able to serve each kind of application (desktop, mobile, web, ...).
+\newpage
+
+\section{Initial Plan}
+
+\subsection{Outline}
+The App is going to be build as a MVP (Minimum Viable Product) that can be expanded to cover all of the features, which are needed over time - so it can grow into a full featured application. First step is getting all of the major pieces set up, including:
+
+\begin{itemize}
+\item Git on Azure DevOps
+\item SQL Database (SSDT)
+\item WebAPI with Authentification
+\item WPF application that can log into the API
+\end{itemize}
+
+\subsection{Technologies}
+
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\begin{itemize}
+\item Unit Testing
+\item Dependency Injection
+\item WPF
+\item MVVM with Caliburn Micro
+\item ASP.NET MVC (Web Frontend)
+\item .NET Framework
+\item .NET Core 3.0
+\item SSDT - SQL Server Data Tools
+\item Git
+\item Azure DevOps
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\begin{itemize}
+\item Async
+\item Reporting
+\item WebAPI
+\item Logging
+\item Data Validation
+\item HTML
+\item CSS
+\item JavaScript
+\item Authentication
+\end{itemize}
+\end{minipage}
+\newpage
+
+\section{Initial Setup in Visual Studio}
+
+\begin{enumerate}
+\item Setting up a Git-Repository, including README, GitIgnore (for VS) and License
+\item Creating a \textbf{Blank Solution}: Other Project Types $\to$ Blank Solution\\
+Such type of sulution isn't language specific.
+\end{enumerate}
+\newpage
 
 \section{Creating a WebAPI with Authentification}
 
-\section{Configuring SWAGGER in the WebAPI}
+\begin{enumerate}
+\item Adding new Project to the Solution:\\\\
+Web $\to$ ASP.NET Web Application (.NET Framework) $\to$ WebAPI\\\\
+Add folders and references for:
+\begin{itemize}
+\item MVC
+\item Web API
+\end{itemize}
+Change Authentication to
+\begin{itemize}
+\item Individual User Accounts
+\end{itemize}
+\item Upgrading all NuGet-Packages
+\end{enumerate}
+\subsection{Indentity Configuration}
+App\_Start $\to$ IdentityConfig.cs\\\\
+In there are some settings for setting up the WebAPI, especially for authentication:
+\begin{itemize}
+\item UserValidator
+\item PasswordValidator
+\end{itemize}
+\subsection{Getting authorized for development}
+
+\subsubsection{Postman}
+The following calls has to be applied in the given order:
+\begin{enumerate}
+\item \textbf{POST}\\\\
+\boxed{\includegraphics[scale=0.5]{pic01}}\\\\
+Creates a new user account and stores this information into the user database.\\
+If \textbf{Status: 200 OK}, username and password has been succesfully created.
+\item \textbf{GET}\\\\
+\boxed{\includegraphics[scale=0.5]{pic02}}\\\\
+It will return an \textbf{access\_token} which is, by default, valid for 14 days. Token is needed for all further interaction with the server. Can be also configured for shorter valid periods.
+\item \textbf{POST}\\\\
+\boxed{\includegraphics[scale=0.5]{pic03}}
+\end{enumerate}
+
+\subsubsection{Getting User Information}
+In order to get the Identity of users returned, some changes have to be implemented. Through this it's becomes possible to apply different accesibility rules, based on the user-group a certain user is part of.
+\begin{enumerate}
+\item \boxed{RMDataManager.Controllers.ValuesController}\\\\
+\boxed{\includegraphics[scale=0.46]{pic04}}
+\end{enumerate}
+\newpage
+
+\section{Installing and configuring SWAGGER}
+SWAGGER is an API documentation and demonstration tool.
+
+\subsection{Installing SWAGGER}
+
+\begin{enumerate}
+\item NuGet-Manager\\\\
+\boxed{\includegraphics[scale=0.38]{pic05}}\\\\
+Adds a SWAGGER to WebAPI-Projects.
+\item Starting SWAGGER\\\\
+\boxed{\includegraphics[scale=0.38]{pic06}}\\\\
+\end{enumerate}
+
+\subsection{Channging the configuration of SWAGGER}
+\boxed{RMDataManager.App\_Start.SwaggerConfig.cs}
+\begin{enumerate}
+\item Changing title\\\\
+\boxed{\includegraphics[scale=0.38]{pic07}}
+\item Enabling propper printing of ducuments\\\\
+\boxed{\includegraphics[scale=0.38]{pic08}}
+\item Treating Enums as Strings\\\\
+\boxed{\includegraphics[scale=0.348]{pic09}}
+\item Changing document title\\\\
+\boxed{\includegraphics[scale=0.348]{pic10}}
+\end{enumerate}
+
+\subsection{Adding OAuth ability}
+\begin{enumerate}
+\item Enabling token endpoint allowance in the SWAGGER documentation
+\begin{enumerate}
+\item Adding a new Class to \boxed{RMDataManager.App\_Start}\\\\
+\boxed{\includegraphics[scale=0.328]{pic11}}\newpage
+\item Implementing the required Interface\\\\
+\boxed{\includegraphics[scale=0.328]{pic12}}\\
+\item Applying it to SwaggerConfig.cs\\\\
+\boxed{\includegraphics[scale=0.328]{pic13}}\\
+\item Logging into the application using SWAGGER and get the token\\\\
+\boxed{\includegraphics[scale=0.366]{pic14}}\\
+\end{enumerate}
+\newpage
+\item Enabling to paste in the bearer token in order to authorize restricted commands
+\begin{enumerate}
+\item Adding a new Class to \boxed{RMDataManager.App\_Start}\\\\
+\boxed{\includegraphics[scale=0.376]{pic15}}\\
+\item Implementing the required Interface\\\\
+\boxed{\includegraphics[scale=0.376]{pic16}}\\
+\item Applying it to SwaggerConfig.cs\\\\
+\boxed{\includegraphics[scale=0.376]{pic17}}\\
+\item Get user information from the application via SWAGGER using the token\\\\
+\boxed{\includegraphics[scale=0.376]{pic18}}\\
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Setting up SQL Database}
 
 \section{WPF with MVVM Project Setup}
 

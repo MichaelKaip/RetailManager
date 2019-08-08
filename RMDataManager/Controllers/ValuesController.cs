@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity; // Needed for getting information about the user
 
 namespace RMDataManager.Controllers
 {
@@ -13,7 +14,10 @@ namespace RMDataManager.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            // Stores the ID of each user
+            var userId = RequestContext.Principal.Identity.GetUserId();
+
+            return new string[] { "value1", "value2", userId };
         }
 
         // GET api/values/5
