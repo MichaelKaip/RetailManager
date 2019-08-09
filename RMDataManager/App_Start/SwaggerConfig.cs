@@ -2,7 +2,6 @@ using System.Web.Http;
 using System.Xml.Linq;
 using WebActivatorEx;
 using RMDataManager;
-using RMDataManager.App_Start;
 using Swashbuckle.Application;
 
 // This can be commented out to disable swagger

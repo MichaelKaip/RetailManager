@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Http.Description;
 using Swashbuckle.Swagger;
 
-namespace RMDataManager.App_Start
+namespace RMDataManager
 {
     public class AuthorizationOperationFilter : IOperationFilter
     {
