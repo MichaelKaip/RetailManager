@@ -205,14 +205,61 @@ Adds a SWAGGER to WebAPI-Projects.
 
 \section{SQL Database Setup}
 
-\begin{enumerate}
-\item Adding new Database Project to the solution\\\\
+\subsection{Adding new Database Project to the solution}
 \boxed{\includegraphics[scale=0.405]{pic19}}\\
+
+\subsection{Adding several folders to the project}
+\boxed{\includegraphics[scale=1.0]{pic20}} \newpage
+
+\subsection{Creating a profile and publishing the Database}
+\begin{enumerate}
+\item \boxed{RightClick~on~RMDatabase \rightarrow Publish \rightarrow Edit \rightarrow Browse}\\\\
+\boxed{\includegraphics[scale=0.4]{pic21}}\\
+\item Naming and saving profile to PublishLocations\\\\
+\boxed{\includegraphics[scale=0.4]{pic22}}\\
 \end{enumerate}
 
 \section{WPF with MVVM Project Setup}
 
+\subsection{Adding the WPF Project to the solution}
+\boxed{\includegraphics[scale=0.375]{pic23}}\\
+
+\subsection{Changing the Assambly Name to the name of the solution in Properties}
+\boxed{\includegraphics[scale=0.375]{pic24}}\\\\
+Also set project as the default startup-project.
+\newpage
+
+\subsection{Adding Caliburn Micro MVVM-Framework}
+Add NuGet-Package to references.
+
+\subsubsection{Adding the folder structure for the MVVM-Framework}
+\begin{center}\boxed{\includegraphics[scale=0.5]{pic25}}\end{center}
+
+\subsubsection{Adding a new ShellViewModel class and a SchellView window}
+\begin{center}\boxed{\includegraphics[scale=0.5]{pic26}}\end{center}
+
+\subsubsection{Adding a Bootstrapper class to DesktopUI}
+\begin{minipage}[t]{0.32\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.5]{pic27}}
+\end{minipage}
+\begin{minipage}[t]{0.68\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.35]{pic28}}
+\end{minipage}
+
+\subsubsection{Removing StartUpURI from App.xaml and adding a new Ressource Dictionary}
+\begin{center}\boxed{\includegraphics[scale=0.48]{pic29}}\end{center}
+\textbf{MainWindow.xaml can be deleted afterwards!!!}
+
 \section{Dependency Injection in WPF}
+
+\subsection{SimpleContainer in Caliburn Micro}
+Caliburn.Micro comes pre-bundled with a Dependency Injection container called SimpleContainer. A dependency injection container is an object that is used to hold dependency mappings for use later in an app via Dependency Injection. Dependency Injection is actually a pattern typically using the container element instead of manual service mapping.
+
+\subsubsection{Implementing SimpleContainer in Bootstrapper.cs}
+\begin{center}\boxed{\includegraphics[scale=0.48]{pic30}}\end{center}
+
+\subsection{Overriding Configure() Method for the container}
+\begin{center}\boxed{\includegraphics[scale=0.48]{pic31}}\end{center}
 
 \section{Planning the Register}
 
