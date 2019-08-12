@@ -27,7 +27,7 @@ namespace RMDesktopUI
             // Connecting the ViewModel to the Views using reflection
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
-                .Where(type => type.Name.EndsWith("ViewModel"))
+                .Where(type => type.Name.EndsWith("ViewModel")) 
                 .ToList()
                 .ForEach(viewmodelType => _container.RegisterPerRequest(
                     viewmodelType, viewmodelType.ToString(), viewmodelType));
