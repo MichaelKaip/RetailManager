@@ -31,7 +31,7 @@
 \contentsline {subsubsection}{\numberline {8.1.1}Implementing SimpleContainer in Bootstrapper.cs}{15}
 \contentsline {subsection}{\numberline {8.2}Overriding Configure() Method for the container}{16}
 \contentsline {section}{\numberline {9}Planning the Register}{16}
-\contentsline {section}{\numberline {10}SQL Database Table Creation}{16}
-\contentsline {section}{\numberline {11}WPF Login Form Creation}{16}
-\contentsline {section}{\numberline {12}Wiring up the WPF Login Form to the API}{16}
-\contentsline {section}{\numberline {13}Login Form Error Handling}{16}
+\contentsline {section}{\numberline {10}SQL Database Table Creation}{17}
+\contentsline {section}{\numberline {11}WPF Login Form Creation}{17}
+\contentsline {section}{\numberline {12}Wiring up the WPF Login Form to the API}{17}
+\contentsline {section}{\numberline {13}Login Form Error Handling}{17}
