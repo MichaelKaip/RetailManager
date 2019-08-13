@@ -33,6 +33,6 @@
 \contentsline {section}{\numberline {9}Datamodel - planning and setup}{16}
 \contentsline {subsection}{\numberline {9.1}Planning the Register}{16}
 \contentsline {subsection}{\numberline {9.2}SQL Database Table Creation}{17}
-\contentsline {section}{\numberline {10}WPF Login Form Creation}{17}
-\contentsline {section}{\numberline {11}Wiring up the WPF Login Form to the API}{17}
-\contentsline {section}{\numberline {12}Login Form Error Handling}{17}
+\contentsline {section}{\numberline {10}WPF Login Form Creation}{18}
+\contentsline {section}{\numberline {11}Wiring up the WPF Login Form to the API}{18}
+\contentsline {section}{\numberline {12}Login Form Error Handling}{18}
