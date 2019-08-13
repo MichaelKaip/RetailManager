@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMDataManager", "RMDataManager\RMDataManager.csproj", "{EF74D7DD-5F71-46A5-8BB9-FC52A824B5EB}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RMDatabase", "RMDatabase\RMDatabase.sqlproj", "{863F3E64-546F-4901-8A59-EDE688F13197}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RMData", "RMDatabase\RMData.sqlproj", "{863F3E64-546F-4901-8A59-EDE688F13197}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMDesktopUI", "RMDesktopUI\RMDesktopUI.csproj", "{5A868810-15F2-4E49-9A0C-5FF05801227A}"
 EndProject

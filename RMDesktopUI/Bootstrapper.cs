@@ -22,7 +22,7 @@ namespace RMDesktopUI
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<EventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>();
 
             // Connecting the ViewModel to the Views using reflection
             GetType().Assembly.GetTypes()
