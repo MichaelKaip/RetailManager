@@ -249,6 +249,7 @@ Add NuGet-Package to references.
 \subsubsection{Removing StartUpURI from App.xaml and adding a new Ressource Dictionary}
 \begin{center}\boxed{\includegraphics[scale=0.48]{pic29}}\end{center}
 \textbf{MainWindow.xaml can be deleted afterwards!!!}
+\newpage
 
 \section{Dependency Injection in WPF}
 
@@ -260,6 +261,7 @@ Caliburn.Micro comes pre-bundled with a Dependency Injection container called Si
 
 \subsection{Overriding Configure() Method for the container}
 \begin{center}\boxed{\includegraphics[scale=0.48]{pic31}}\end{center}
+\newpage
 
 \section{Datamodel - planning and setup}
 
@@ -298,9 +300,67 @@ Caliburn.Micro comes pre-bundled with a Dependency Injection container called Si
 
 \section{WPF Login Form Creation}
 
+\subsection{Inheritance from the conductor class in Caliburn Micro}
+\begin{center}\boxed{\includegraphics[scale=0.55]{pic39}}\end{center}
+Conductor is a base class which inherits from Screen. Its responsibility is to conduct other objects by managing an active item and maintain a strict lifecycle of this conducted item. The conductor exists in multiple variants such as the one item conductor simple called Conductor, the multiple item conductors such as \boxed{Conductor.Collection.OneActive and Conductor.Collection.AllActive}.
+
+\subsection{Implementing the menue bar}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.34]{pic40}}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.34]{pic41}}
+\end{minipage}
+
+\subsection{Adding a UserControl}
+
+\subsubsection{Adding a class LoginViewModel (public) and UserControl LoginView}
+\begin{center}\boxed{\includegraphics[scale=0.55]{pic42}}\end{center}
+
+\subsubsection{Designing the UserControl}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.34]{pic44}}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.34]{pic45}}
+\end{minipage}
+
+\subsubsection{Activating the LoginView on startup in the ShellView}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.29]{pic46}}
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.29]{pic47}}
+\end{minipage}\\\\\\
+Sealed is used to restrict the users from inheriting. A class can be sealed by using the sealed keyword or a single method. The keyword tells the compiler that class or method cannot be extended. No class can be derived from a sealed class.
+\newpage
+
+\subsubsection{Implementing LoginViewModel.cs}
+\boxed{\includegraphics[scale=0.9]{pic51}}
+
+\subsubsection{Connecting the LoginViewModel to Caliburn.Micro}
+\begin{enumerate}
+\item Adding a helper class (PasswordBoxHelper.cs) to RMDesktopUI
+\begin{center}\boxed{\includegraphics[scale=0.55]{pic49}}\end{center}
+\item Adding some lines to the constructor of Bootstrapper.cs
+\begin{center}\boxed{\includegraphics[scale=0.495]{pic50}}\end{center}
+\end{enumerate}
+See the example on stackoverflow.com...
 \section{Wiring up the WPF Login Form to the API}
 
 \section{Login Form Error Handling}
+
+\section{Getting User Data}
+
+\section{Sales Page Creation}
+
+\section{Event Aggregation in WPF}
+
+\section{Displaying Product data}
+
+\section{Wiring up WPF Shopping Cart}
+
+\section{Modifying SQL, the API and WPF to add Taxes}
 
 
 \end{document}
