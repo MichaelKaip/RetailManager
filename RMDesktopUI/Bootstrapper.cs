@@ -30,7 +30,9 @@ namespace RMDesktopUI
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAPIHelper, APIHelper>(); // Enables keeping the http-client open
+                                                     // until the application gets closed
 
             // Connecting the ViewModel to the Views using reflection
             GetType().Assembly.GetTypes()

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Caliburn.Micro;
+using RMDesktopUI.Helpers;
 
 namespace RMDesktopUI.ViewModels
 {
@@ -10,6 +12,8 @@ namespace RMDesktopUI.ViewModels
          */
         private string _userName;
         private string _password;
+
+        private readonly IAPIHelper _apiHelper;
 
         /*
          * Public properties
@@ -35,6 +39,14 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
+        /*
+         * Constructor
+         */
+        public LoginViewModel(IAPIHelper apiHelper)
+        {
+            _apiHelper = apiHelper;
+        }
+
         public bool CanLogIn(string userName, string password)
         {
             // Includes checking for null (?)
@@ -43,9 +55,17 @@ namespace RMDesktopUI.ViewModels
             return output;
         }
 
-        public void LogIn(string userName, string password)
+        public async Task LogIn(string userName, string password)
         {
-            
+            try
+            {
+                var result = await _apiHelper.Authenticate(UserName, Password);
+            }
+            catch (Exception ex) 
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
 
     }

@@ -346,8 +346,45 @@ Sealed is used to restrict the users from inheriting. A class can be sealed by u
 \begin{center}\boxed{\includegraphics[scale=0.495]{pic50}}\end{center}
 \end{enumerate}
 See the example on stackoverflow.com...
-\section{Wiring up the WPF Login Form to the API}
+\newpage
 
+\section{Wiring up the WPF Login Form}
+
+\subsection{Implementing a class AuthenticatedUser.cs}
+Holds the information for already authenticated users.\\\\
+\boxed{\includegraphics[scale=0.68]{pic53}}
+
+\subsection{Implementing a  helper class to handle API call interactions}
+\boxed{\includegraphics[scale=0.68]{pic52}}
+\newpage
+
+\subsection{Implementing a Interface IAPIHelper.cs}
+Needed for dependency injection, in order to add it to the Configure() method in Bootstrapper.cs\\\\
+\boxed{\includegraphics[scale=0.68]{pic54}}
+
+\subsection{Adding <appsettings> to App.Config}
+\boxed{\includegraphics[scale=0.638]{pic55}}
+
+\subsection{Adding APIHelper and IAPIHelper to the container in Bootstrapper.cs}
+\boxed{\includegraphics[scale=0.638]{pic56}}
+
+\subsection{Applying some changings to LoginViewModel.cs}
+
+\subsubsection{Adding a new private property as a backing field}
+\boxed{\includegraphics[scale=0.638]{pic57}}
+
+\subsubsection{Adding a constructor and initializing the property from within}
+\boxed{\includegraphics[scale=0.638]{pic58}}
+
+\subsubsection{Implementig the Login() method}
+\boxed{\includegraphics[scale=0.524]{pic59}}
+
+\subsection{Enabling the solution to start multiple projects}
+\boxed{\includegraphics[scale=0.638]{pic60}}\\\\
+\boxed{\includegraphics[scale=0.524]{pic61}}\\\\
+\boxed{\includegraphics[scale=0.524]{pic62}}
+
+\newpage
 \section{Login Form Error Handling}
 
 \section{Getting User Data}
