@@ -58,6 +58,5 @@ namespace RMDesktopUI.Helpers
                 password, new object[] {password.Password.Length, 0}
             );
         }
-
     }
 }

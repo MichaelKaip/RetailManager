@@ -8,16 +8,12 @@ namespace RMDesktopUI.ViewModels
     public class LoginViewModel : Screen
     {
         /*
-         * Backing fields
+         * Properties with Backing Fields
          */
         private string _userName;
         private string _password;
+        private string _errorMessage;
 
-        private readonly IAPIHelper _apiHelper;
-
-        /*
-         * Public properties
-         */
         public string UserName
         {
             get => _userName;
@@ -26,6 +22,7 @@ namespace RMDesktopUI.ViewModels
                 _userName = value;
                 // It's going to be fired every time we change the user value
                 NotifyOfPropertyChange(() => UserName);
+                NotifyOfPropertyChange(() => CanLogIn);
             }
         }
 
@@ -36,8 +33,48 @@ namespace RMDesktopUI.ViewModels
             { 
                 _password = value;
                 NotifyOfPropertyChange(() => Password);
+                NotifyOfPropertyChange(() => CanLogIn);
             }
         }
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                NotifyOfPropertyChange(() => IsErrorVisible);
+                NotifyOfPropertyChange(() => ErrorMessage);
+                _errorMessage = value;
+            }
+        }
+
+
+
+        /*
+         * Properties
+         */
+        public bool IsErrorVisible
+        {
+            get
+            {
+                var output = ErrorMessage?.Length > 0;
+
+                return output;
+            }
+        }
+
+        public bool CanLogIn
+        {
+            get
+            {
+                var output = UserName?.Length > 0 && Password?.Length > 0;
+
+                return output;
+            }
+        }
+
+        private readonly IAPIHelper _apiHelper;
+
 
         /*
          * Constructor
@@ -47,13 +84,6 @@ namespace RMDesktopUI.ViewModels
             _apiHelper = apiHelper;
         }
 
-        public bool CanLogIn(string userName, string password)
-        {
-            // Includes checking for null (?)
-            var output = UserName?.Length > 0 && Password?.Length > 0;
-
-            return output;
-        }
 
         public async Task LogIn(string userName, string password)
         {
@@ -64,7 +94,7 @@ namespace RMDesktopUI.ViewModels
             catch (Exception ex) 
             {
 
-                Console.WriteLine(ex.Message);
+                ErrorMessage = ex.Message;
             }
         }
 

@@ -349,6 +349,7 @@ See the example on stackoverflow.com...
 \newpage
 
 \section{Wiring up the WPF Login Form}
+Connecting the login form button to the authentication API endpoint (/token). Gets back the bearer token or an exception if failed.
 
 \subsection{Implementing a class AuthenticatedUser.cs}
 Holds the information for already authenticated users.\\\\
@@ -386,6 +387,15 @@ Needed for dependency injection, in order to add it to the Configure() method in
 
 \newpage
 \section{Login Form Error Handling}
+
+\subsection{Displaying an login  error message within the login form}
+\boxed{\includegraphics[scale=0.524]{pic63}}\\\\
+Through \boxed{Visibility} the funktionality of collapsing the error message space in case of no error is going to be displayed is added. In case of an error the field expands and the error is going to be displayed. To make it work, first the \boxed{BooleanToVisibilityConverter} has to be added to the RessourceDictionary in App.xaml:\\\\
+\boxed{\includegraphics[scale=0.524]{pic64}}\\\\
+Afterwards properties for \boxed{ErrorMessage} and \boxed{IsErrorVisible} has to be implemented in LoginViewModel.cs:\\\\
+\boxed{\includegraphics[scale=0.625]{pic65}}\\\\
+And finally the Login() method has to be changed in the way, that in case of an exception, the exception message is stored into the \boxed{ErrorMessage} property:\\\\
+\boxed{\includegraphics[scale=0.625]{pic66}}\\\\
 
 \section{Getting User Data}
 

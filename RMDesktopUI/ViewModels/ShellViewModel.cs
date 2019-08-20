@@ -10,7 +10,8 @@ namespace RMDesktopUI.ViewModels
     public class ShellViewModel : Conductor<object> // Could also be set up more specifically
                                                     // for certain types, or even use an interface.
     {
-        // Using constructor injection to pass in a new instance of loginVm
+        // Using constructor injection to pass in a new instance of
+        // loginVm and activating it immediately after storing it.
         private LoginViewModel _loginVm;
         public ShellViewModel(LoginViewModel loginVm)
         {
