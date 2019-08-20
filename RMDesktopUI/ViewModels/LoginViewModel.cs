@@ -42,12 +42,11 @@ namespace RMDesktopUI.ViewModels
             get => _errorMessage;
             set
             {
+                _errorMessage = value;
                 NotifyOfPropertyChange(() => IsErrorVisible);
                 NotifyOfPropertyChange(() => ErrorMessage);
-                _errorMessage = value;
             }
         }
-
 
 
         /*
@@ -89,6 +88,7 @@ namespace RMDesktopUI.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
             }
             catch (Exception ex) 
