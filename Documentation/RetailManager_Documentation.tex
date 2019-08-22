@@ -7,6 +7,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{graphicx}
+\usepackage{enumitem}
 \usepackage{esvect}
 \usepackage{amssymb}
 \usepackage{nicefrac}
@@ -54,12 +55,7 @@ The goal of tkhis project is to build a dektop app that runs a cash register, ha
 \subsection{Outline}
 The App is going to be build as a MVP (Minimum Viable Product) that can be expanded to cover all of the features, which are needed over time - so it can grow into a full featured application. First step is getting all of the major pieces set up, including:
 
-\begin{itemize}
-\item Git on Azure DevOps
-\item SQL Database (SSDT)
-\item WebAPI with Authentification
-\item WPF application that can log into the API
-\end{itemize}
+
 
 \subsection{Technologies}
 
@@ -398,6 +394,65 @@ And finally the Login() method has to be changed in the way, that in case of an 
 \boxed{\includegraphics[scale=0.625]{pic66}}\\\\
 
 \section{Getting User Data}
+Getting all information about a logged in user from the database. This information is going to be stored in an singleton object and therefore can be used as long as the user is logged in. Once he's logged out, the corresponding object which holds the user information is going to be destroyed.\\\\
+In order to make it work, following things has to be done:
+
+\begin{itemize}
+\item implementing a stored procedure
+\item implementing a model to store the data in the API
+\item creating an API endpoint
+\item implementing a method that calls the endpoint from the WPF application
+\item implementing a model that hold data in the WPF application
+\end{itemize}
+
+\subsection{Adding a class library for the API}
+The aim of this library is to provide data access. It is seperate from the WPF application an so it knows nothing about the databse, nor have access to it. Putting code not directly into the API enables re-usability.\\\\
+\boxed{\includegraphics[scale=0.625]{pic67}}
+
+\subsubsection{Installing Dapper}
+Dapper is an object-relational mapping (ORM) product for the Microsoft .NET platform: it provides a framework for mapping an object-oriented domain model to a traditional relational database. Its purpose is to relieve the developer from a significant portion of relational data persistence-related programming tasks.\\\\
+Add NuGet-Package to references...
+
+\subsubsection{The SqlDataAccess class}
+\boxed{\includegraphics[scale=0.69]{pic68}}
+\newpage
+
+\subsubsection{The UserData class}
+This class contains methods and the logic on \textbf{how} to get data.
+
+\begin{enumerate}
+\item Adding a stored Prodecure to \boxed{RMData.dbo.StoredProcedures}\\\\
+\boxed{\includegraphics[scale=0.65]{pic69}}\\\\
+
+\item Adding a UserModel class\\\\
+\boxed{\includegraphics[scale=0.65]{pic70}}\\\\
+\newpage
+
+\item Adding the UserData class\\\\
+\boxed{\includegraphics[scale=0.65]{pic71}}
+\end{enumerate}
+
+\subsubsection{Adding a UserController.cs to RMDataManager.Controllers}
+\boxed{\includegraphics[scale=0.69]{pic72}}\\\\
+Deleting all code in the class, except of this:\\\\
+\boxed{\includegraphics[scale=0.69]{pic73}}\\\\
+Implementing a method to get the Id from logged in users:\\\\
+\boxed{\includegraphics[scale=0.69]{pic74}}\\\\
+Publishing the stored procedure to the database:\\\\
+\boxed{\includegraphics[scale=0.9]{pic75}}\\\\
+Adding a user for testing:\\\\
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.43]{pic76}}\\\\
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.43]{pic77}}
+\end{minipage}
+Now that there's an entry in the user database, the application can be started and use SWAGGER to run and test the GET command in \boxed{Values/GET}:
+
+
+
+
+
 
 \section{Sales Page Creation}
 
