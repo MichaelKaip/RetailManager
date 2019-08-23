@@ -414,7 +414,7 @@ Dapper is an object-relational mapping (ORM) product for the Microsoft .NET plat
 Add NuGet-Package to references...
 
 \subsubsection{The SqlDataAccess class}
-\boxed{\includegraphics[scale=0.69]{pic68}}
+\boxed{\includegraphics[scale=0.65]{pic68}}
 \newpage
 
 \subsubsection{The UserData class}
@@ -422,22 +422,20 @@ This class contains methods and the logic on \textbf{how} to get data.
 
 \begin{enumerate}
 \item Adding a stored Prodecure to \boxed{RMData.dbo.StoredProcedures}\\\\
-\boxed{\includegraphics[scale=0.65]{pic69}}\\\\
+\boxed{\includegraphics[scale=0.62]{pic69}}\\\\
 
 \item Adding a UserModel class\\\\
-\boxed{\includegraphics[scale=0.65]{pic70}}\\\\
+\boxed{\includegraphics[scale=0.62]{pic70}}\\\\
 \newpage
 
 \item Adding the UserData class\\\\
-\boxed{\includegraphics[scale=0.65]{pic71}}
+\boxed{\includegraphics[scale=0.57]{pic71}}
 \end{enumerate}
 
 \subsubsection{Adding a UserController.cs to RMDataManager.Controllers}
 \boxed{\includegraphics[scale=0.69]{pic72}}\\\\
-Deleting all code in the class, except of this:\\\\
-\boxed{\includegraphics[scale=0.69]{pic73}}\\\\
-Implementing a method to get the Id from logged in users:\\\\
-\boxed{\includegraphics[scale=0.69]{pic74}}\\\\
+Implementing the UserController:\\\\
+\boxed{\includegraphics[scale=0.49]{pic74}}\\\\
 Publishing the stored procedure to the database:\\\\
 \boxed{\includegraphics[scale=0.9]{pic75}}\\\\
 Adding a user for testing:\\\\
@@ -447,12 +445,39 @@ Adding a user for testing:\\\\
 \begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
 \boxed{\includegraphics[scale=0.43]{pic77}}
 \end{minipage}
-Now that there's an entry in the user database, the application can be started and use SWAGGER to run and test the GET command in \boxed{Values/GET}:
+Getting the connection string from the database and adding it to Web.config:\\\\
+\boxed{\includegraphics[scale=0.43]{pic78}}\\\\
+\boxed{\includegraphics[scale=0.43]{pic79}}\\\\
+Now that there's an entry in the user database, the application can be started and use SWAGGER to run and test the GET command in \boxed{Values/GET}\\\\
+\textbf{Next step is to implement the functionality to get back the information about the user automatically, once he logged in successfully.}
 
+\subsection{Implementing data capturing from the UI side}
 
+\subsubsection{Adding a new class library}
+The aim of this library is for user inface support.\\\\
+\boxed{\includegraphics[scale=0.43]{pic80}}
 
+\subsubsection{The LoggedInUserModel class}
+\boxed{\includegraphics[scale=0.5]{pic81}}
 
+\subsubsection{Moving helpers and Models}
+\boxed{\includegraphics[scale=0.43]{pic82}}\\\\
+Namespaces has to be ajusted and missing references added afterwards.
 
+\subsubsection{Extracting an Interface and adding to simpleContainer}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.3]{pic83}}\\\\
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.3]{pic84}}\\\\
+\end{minipage}
+
+\subsubsection{Implementing a Method GetLoggedInUserInfo in APIHelper.cs}
+\boxed{\includegraphics[scale=0.468]{pic85}}\\\\
+In order to make it work, some more changes has to be done in the same class:\\\\
+\boxed{\includegraphics[scale=0.465]{pic86}}\\\\
+Finally the LogIn() method in the LoginViewModel has to be extended:\\\\
+\boxed{\includegraphics[scale=0.494]{pic87}}\\\\
 
 \section{Sales Page Creation}
 

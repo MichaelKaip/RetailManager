@@ -61,8 +61,14 @@
 \contentsline {subsubsection}{\numberline {13.1.2}The SqlDataAccess class}{32}
 \contentsline {subsubsection}{\numberline {13.1.3}The UserData class}{33}
 \contentsline {subsubsection}{\numberline {13.1.4}Adding a UserController.cs to RMDataManager.Controllers}{34}
-\contentsline {section}{\numberline {14}Sales Page Creation}{36}
-\contentsline {section}{\numberline {15}Event Aggregation in WPF}{36}
-\contentsline {section}{\numberline {16}Displaying Product data}{36}
-\contentsline {section}{\numberline {17}Wiring up WPF Shopping Cart}{36}
-\contentsline {section}{\numberline {18}Modifying SQL, the API and WPF to add Taxes}{36}
+\contentsline {subsection}{\numberline {13.2}Implementing data capturing from the UI side}{36}
+\contentsline {subsubsection}{\numberline {13.2.1}Adding a new class library}{36}
+\contentsline {subsubsection}{\numberline {13.2.2}The LoggedInUserModel class}{37}
+\contentsline {subsubsection}{\numberline {13.2.3}Moving helpers and Models}{37}
+\contentsline {subsubsection}{\numberline {13.2.4}Extracting an Interface and adding to simpleContainer}{37}
+\contentsline {subsubsection}{\numberline {13.2.5}Implementing a Method GetLoggedInUserInfo in APIHelper.cs}{38}
+\contentsline {section}{\numberline {14}Sales Page Creation}{39}
+\contentsline {section}{\numberline {15}Event Aggregation in WPF}{39}
+\contentsline {section}{\numberline {16}Displaying Product data}{39}
+\contentsline {section}{\numberline {17}Wiring up WPF Shopping Cart}{39}
+\contentsline {section}{\numberline {18}Modifying SQL, the API and WPF to add Taxes}{39}

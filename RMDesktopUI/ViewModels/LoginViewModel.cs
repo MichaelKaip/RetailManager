@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Caliburn.Micro;
-using RMDesktopUI.Helpers;
+using RMDesktopUI.Library.API;
 
 namespace RMDesktopUI.ViewModels
 {
@@ -90,6 +90,10 @@ namespace RMDesktopUI.ViewModels
             {
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                // Capture more information about the user
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
             }
             catch (Exception ex) 
             {

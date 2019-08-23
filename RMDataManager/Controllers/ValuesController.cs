@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using Microsoft.AspNet.Identity; // Needed for getting information about the user
+using Microsoft.AspNet.Identity; // Needed for getting user information
 
 namespace RMDataManager.Controllers
 {
