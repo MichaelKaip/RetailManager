@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Caliburn.Micro;
 
 namespace RMDesktopUI.ViewModels
@@ -14,7 +9,7 @@ namespace RMDesktopUI.ViewModels
          * Private backing fields
          */
         private BindingList<string> _products;
-        private string _itemQuantity;
+        private int _itemQuantity;
         private BindingList<string> _cart;
 
         /*
@@ -30,7 +25,9 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
-        public string ItemQuantity
+        public int ItemQuantity // Can be int even though it's a text box in the form.
+                                // That enables error checking in Caliburn Micro
+                                // and it's not possible to type in text.
         {
             get => _itemQuantity;
             set

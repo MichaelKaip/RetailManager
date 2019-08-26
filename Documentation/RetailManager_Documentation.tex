@@ -484,6 +484,8 @@ Finally the LogIn() method in the LoginViewModel has to be extended:\\\\
 \item Adding a SalesViewModel.cs and SalesView.xaml (UserControl) to RMDesktopUI
 \item Designing the sales page
 \end{enumerate}
+
+\subsection{Designing the Sales Page}
 \begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
 \boxed{\includegraphics[scale=0.42]{pic90}}
 \end{minipage}
@@ -491,8 +493,36 @@ Finally the LogIn() method in the LoginViewModel has to be extended:\\\\
 \boxed{\includegraphics[scale=0.42]{pic88}}
 \boxed{\includegraphics[scale=0.42]{pic89}}\\\\
 \end{minipage}
-\section{Event Aggregation in WPF}
 
+\subsection{Implementing SalesViewModel.cs}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.42]{pic91}}\\
+\boxed{\includegraphics[scale=0.42]{pic92}}\\\\
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.42]{pic93}}
+\end{minipage}
+Just scaffolds out the methods needed in this class. Will be implemented later...
+\newpage
+
+\section{Event Aggregation in WPF}
+Wiring up an event aggregator to enable \textbf{inter-form communication}.\\\\
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.42]{pic94}}\\\\
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.35]{pic95}}
+\end{minipage}
+That's an example of the usefullness of DI. It doesn't have to be instatiated or set up. Because it's assigned in simpleContainer, everthing is going to be done behind the scenes in the framework and then it can be used everywhere in that class.\\\\
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.33]{pic96}}\\\\
+\end{minipage}
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
+\boxed{\includegraphics[scale=0.3]{pic98}}\\\\
+\boxed{\includegraphics[scale=0.35]{pic97}}
+\end{minipage}
+Next step, is to listen for the event on the other side (ShellViewModel.cs).\\\\
+\boxed{\includegraphics[scale=0.35]{pic99}}
 \section{Displaying Product data}
 
 \section{Wiring up WPF Shopping Cart}

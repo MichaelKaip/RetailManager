@@ -4,19 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using RMDesktopUI.EventModels;
 
 namespace RMDesktopUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object> // Could also be set up more specifically
-                                                    // for certain types, or even use an interface.
+    public class ShellViewModel : Conductor<object>, IHandle<LogOnEventModel>
     {
         // Using constructor injection to pass in a new instance of
         // loginVm and activating it immediately after storing it.
-        private LoginViewModel _loginVm;
-        public ShellViewModel(LoginViewModel loginVm)
+        private IEventAggregator _events;
+        private SalesViewModel _salesVM;
+        private SimpleContainer _container;
+
+        public ShellViewModel(IEventAggregator events, SalesViewModel salesVM, SimpleContainer container)
         {
-            _loginVm = loginVm;
-            ActivateItem(_loginVm);
+            _events = events;
+            _salesVM = salesVM;
+            _container = container;
+
+            _events.Subscribe(this);
+          
+            ActivateItem(_container.GetInstance<LoginViewModel>());
 
         }
 
@@ -24,6 +32,11 @@ namespace RMDesktopUI.ViewModels
         public sealed override void ActivateItem(object item)
         {
             base.ActivateItem(item);
+        }
+
+        public void Handle(LogOnEventModel message)
+        {
+            ActivateItem(_salesVM);
         }
     }
 }
