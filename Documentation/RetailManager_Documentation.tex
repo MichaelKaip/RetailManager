@@ -506,7 +506,7 @@ Just scaffolds out the methods needed in this class. Will be implemented later..
 \newpage
 
 \section{Event Aggregation in WPF}
-Wiring up an event aggregator to enable \textbf{inter-form communication}.\\\\
+\subsection{Wiring up an event aggregator to enable inter-form communication}
 \begin{minipage}[t]{0.5\linewidth}\vspace{0pt}
 \boxed{\includegraphics[scale=0.42]{pic94}}\\\\
 \end{minipage}
@@ -523,7 +523,53 @@ That's an example of the usefullness of DI. It doesn't have to be instatiated or
 \end{minipage}
 Next step, is to listen for the event on the other side (ShellViewModel.cs).\\\\
 \boxed{\includegraphics[scale=0.35]{pic99}}
+
 \section{Displaying Product data}
+Gaining the available items for sale from the database, through the API into the WPF-Project.
+
+\subsection{Adding a new column to the product table}
+\boxed{\includegraphics[scale=0.62]{pic100}}
+
+
+\subsection{Getting data into the API}
+
+\subsubsection{Adding a new stored procedure for data request}
+\boxed{\includegraphics[scale=0.6]{pic101}}
+
+\subsubsection{Creating an endpoint in the API for the products}
+\begin{enumerate}
+\item First a new to controller has to be added to \boxed{RMDataManager.Controllers} \\\\
+\boxed{\includegraphics[scale=0.63]{pic102}}
+\newpage
+\item Implementing the controller\\\\
+\boxed{\includegraphics[scale=0.63]{pic104}}
+\item Adding a ProductModel to \boxed{RMDataManager.Library}\\\\
+\boxed{\includegraphics[scale=0.63]{pic103}}
+\newpage
+\item Adding a new class ProductData.cs to \boxed{RMDataManager.Library.DataAccess}\\\\
+\boxed{\includegraphics[scale=0.45]{pic105}}
+\end{enumerate}
+
+\subsubsection{ Connecting from the WPF side}
+\begin{enumerate}
+\item Applying some little changes in \boxed{APIHelper.cs}\\\\
+\boxed{\includegraphics[scale=0.45]{pic106}}
+\item Adding a new product endpoint and extracting an Interface from it\\\\
+\boxed{\includegraphics[scale=0.4]{pic107}}
+\newpage
+\item Adding a new property to \boxed{IAPIHelper.cs} and \boxed{APIHelper.cs}\\\\
+\boxed{\includegraphics[scale=0.4]{pic108}}\\\\
+\boxed{\includegraphics[scale=0.4]{pic109}}
+\item Adding the product model to the UI\\\\
+\boxed{\includegraphics[scale=0.4]{pic110}}
+\item Adding it to Bootstrapper.cs\\\\
+\boxed{\includegraphics[scale=0.4]{pic111}}
+\item Adding a constructor to SalesViewModel.cs and injecting it from there as well as implementing a method for loading product data\\\\
+\boxed{\includegraphics[scale=0.4]{pic112}}\\\\
+\boxed{\includegraphics[scale=0.4]{pic113}}
+\item Modifying how the SalesView is gong to display this products\\\\
+\boxed{\includegraphics[scale=0.4]{pic114}}
+\end{enumerate}
 
 \section{Wiring up WPF Shopping Cart}
 

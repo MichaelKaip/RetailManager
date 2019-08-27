@@ -1,5 +1,8 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using Caliburn.Micro;
+using RMDesktopUI.Library.API;
+using RMDesktopUI.Library.Models;
 
 namespace RMDesktopUI.ViewModels
 {
@@ -8,14 +11,15 @@ namespace RMDesktopUI.ViewModels
         /*
          * Private backing fields
          */
-        private BindingList<string> _products;
+        private BindingList<ProductModel> _products;
         private int _itemQuantity;
         private BindingList<string> _cart;
+        private IProductEndPoint _productEndPoint;
 
         /*
          * Public Properties
          */
-        public BindingList<string> Products 
+        public BindingList<ProductModel> Products 
         {
             get => _products;
             set
@@ -24,6 +28,7 @@ namespace RMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Products);
             }
         }
+
 
         public int ItemQuantity // Can be int even though it's a text box in the form.
                                 // That enables error checking in Caliburn Micro
@@ -75,6 +80,28 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
+        /*
+         * Constructors
+         */
+        public SalesViewModel(IProductEndPoint productEndPoint)
+        {
+            _productEndPoint = productEndPoint;
+        }
+
+        /*
+         * Methods
+         */
+        protected override async void OnViewLoaded(object view)
+        {
+            base.OnViewLoaded(view);
+            await LoadProducts();
+        }
+
+        private async Task LoadProducts()
+        {
+            var productList = await _productEndPoint.GetAll();
+            Products = new BindingList<ProductModel>(productList);
+        }
 
         public bool CanAddToCart
         {
