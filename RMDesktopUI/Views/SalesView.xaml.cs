@@ -24,5 +24,10 @@ namespace RMDesktopUI.Views
         {
             InitializeComponent();
         }
+
+        private void Cart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

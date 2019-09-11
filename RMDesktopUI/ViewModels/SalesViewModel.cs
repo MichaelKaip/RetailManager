@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Micro;
 using RMDesktopUI.Library.API;
@@ -13,13 +14,14 @@ namespace RMDesktopUI.ViewModels
          */
         private BindingList<ProductModel> _products;
         private int _itemQuantity;
-        private BindingList<string> _cart;
+        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();
         private IProductEndPoint _productEndPoint;
+        private ProductModel _selectedProduct;
 
         /*
          * Public Properties
          */
-        public BindingList<ProductModel> Products 
+        public BindingList<ProductModel> Products
         {
             get => _products;
             set
@@ -28,6 +30,18 @@ namespace RMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Products);
             }
         }
+
+        public ProductModel SelectedProduct
+        {
+            get => _selectedProduct;
+            set
+            {
+                _selectedProduct = value;
+                NotifyOfPropertyChange(() => SelectedProduct);
+                NotifyOfPropertyChange(() => CanAddToCart);
+            }
+        }
+
 
 
         public int ItemQuantity // Can be int even though it's a text box in the form.
@@ -39,6 +53,7 @@ namespace RMDesktopUI.ViewModels
             {
                 _itemQuantity = value;
                 NotifyOfPropertyChange(() => ItemQuantity);
+                NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
 
@@ -46,8 +61,9 @@ namespace RMDesktopUI.ViewModels
         {
             get
             {
-                // Todo: Replace with calculation
-                return "$0.00";
+                var subTotal = Cart.Sum(item => (item.Product.RetailPrice * item.QuantityInCart));
+
+                return subTotal.ToString("C");
             }
         }
 
@@ -70,7 +86,7 @@ namespace RMDesktopUI.ViewModels
         }
 
 
-        public BindingList<string> Cart
+        public BindingList<CartItemModel> Cart
         {
             get => _cart;
             set
@@ -107,9 +123,8 @@ namespace RMDesktopUI.ViewModels
         {
             get
             {
-                bool output = false;
-
                 // Make sure something is selected and an item quantity is given.
+                var output = ItemQuantity > 0 && SelectedProduct?.QuantityInStock >= ItemQuantity;
 
                 return output;
             }
@@ -117,7 +132,32 @@ namespace RMDesktopUI.ViewModels
 
         public void AddToCart()
         {
+            CartItemModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
 
+            // Either updating the quantity of an existing item in cart
+            // or adding a new item.
+            if (existingItem != null)
+            {
+                existingItem.QuantityInCart += ItemQuantity;
+
+                // Not the best solution - it's just tricking the system to update the list.
+                Cart.Remove(existingItem);
+                Cart.Add(existingItem);
+            }
+            else
+            {
+                var item = new CartItemModel
+                {
+                    Product = SelectedProduct,
+                    QuantityInCart = ItemQuantity
+                };
+
+                Cart.Add(item);
+            }
+
+            SelectedProduct.QuantityInStock -= ItemQuantity;
+            ItemQuantity = 1;
+            NotifyOfPropertyChange(() => SubTotal);
         }
 
         public bool CanRemoveFromCart
@@ -135,6 +175,7 @@ namespace RMDesktopUI.ViewModels
         public void RemoveFromCart()
         {
 
+            NotifyOfPropertyChange(() => SubTotal);
         }
 
         public bool CanCheckOut

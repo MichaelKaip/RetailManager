@@ -572,6 +572,40 @@ Gaining the available items for sale from the database, through the API into the
 \end{enumerate}
 
 \section{Wiring up WPF Shopping Cart}
+\begin{enumerate}
+\item Adding a new Property to \boxed{SalesViewModel.cs}\\\\
+\boxed{\includegraphics[scale=0.41]{pic115}}
+\item Now the property can be used in \boxed{SalesView.xaml}\\\\
+\boxed{\includegraphics[scale=0.41]{pic116}}
+\item Making sure the selected quantity is valid\\\\
+\boxed{\includegraphics[scale=0.41]{pic117}}\\\\
+\boxed{\includegraphics[scale=0.41]{pic118}}
+\item Adding the selected product to the cart
+\begin{enumerate}
+\item Adding a new Model to \boxed{RMDektopUI.Library.Models}\\\\
+Calculates the the quantities of items in the cart.\\\\
+\boxed{\includegraphics[scale=0.41]{pic119}}
+\item Changint the type of the Cart property to the type of this new model\\\\
+\boxed{\includegraphics[scale=0.41]{pic120}}\\\\
+This is goint to cange the UI...\\
+\item Adding a \boxed{ListBox.ItemTemplate} to the Cart\\\\
+\boxed{\includegraphics[scale=0.41]{pic122}}\newpage
+\item ICreating an instance of \boxed{CartItemModel} and add the model to the Cart\\\\
+\boxed{\includegraphics[scale=0.41]{pic121}}
+\item Initializing a new Bindinglist for the Cart\\\\
+\boxed{\includegraphics[scale=0.41]{pic123}}
+\item Showing the quantity of the selected items in the cart\\\\
+\boxed{\includegraphics[scale=0.41]{pic124}}\\\\
+\boxed{\includegraphics[scale=0.41]{pic125}}
+\end{enumerate}
+\item Calculating \boxed{SubTotal}\\\\
+\boxed{\includegraphics[scale=0.41]{pic126}}\\\\
+\boxed{\includegraphics[scale=0.41]{pic127}}\newpage
+\item Modifying \boxed{QuantityInStock} based upon how much items has been already added to the cart\\\\
+\boxed{\includegraphics[scale=0.41]{pic128}}
+\item Updating the selected quantity of an existing item in the cart\\\\
+\boxed{\includegraphics[scale=0.41]{pic129}}
+\end{enumerate}
 
 \section{Modifying SQL, the API and WPF to add Taxes}
 
