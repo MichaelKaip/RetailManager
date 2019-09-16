@@ -609,5 +609,32 @@ This is goint to cange the UI...\\
 
 \section{Modifying SQL, the API and WPF to add Taxes}
 
+\subsection{Adding a "taxable" flag}
+\boxed{\includegraphics[scale=0.41]{pic130}}\\\\
+Alternatively there can be also set flags for different tax rates.\\\\
+\boxed{\includegraphics[scale=0.48]{pic131}}\\\\
+\boxed{\includegraphics[scale=0.48]{pic132}}\\\\
+\boxed{\includegraphics[scale=0.48]{pic133}}
+
+\subsubsection{Adding the tax rate to App.Config}
+\boxed{\includegraphics[scale=0.48]{pic134}}
+
+\subsubsection{Adding a ConfigHelper.cs}
+\boxed{\includegraphics[scale=0.48]{pic135}}\\\\
+Now it has to be added to the container in \boxed{Bootstrapper.cs} to enable DI:\\\\
+\boxed{\includegraphics[scale=0.48]{pic136}}\\\\
+And finally it can be requested from \boxed{SalesViewModel.cs} in order to gain access from there to it:\\\\
+\boxed{\includegraphics[scale=0.48]{pic137}}\\\\
+\boxed{\includegraphics[scale=0.48]{pic138}}\\\\
+Now the TAX and the SucTotal getters can be implemented:\\\\
+\boxed{\includegraphics[scale=0.48]{pic139}}\\\\
+And the getter for TOTAL :\\\\
+\boxed{\includegraphics[scale=0.48]{pic140}}\\\\
+And finally updating the NotifyOfPropertyChange for SubTotal, Tax and Total in \textbf{AddToCart() and RemoveFromCart()}:\\\\
+\boxed{\includegraphics[scale=0.48]{pic141}}
+
+
+
+
 
 \end{document}

@@ -8,4 +8,5 @@
     [CreateDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 
 	/* Has to be modified manually everytime the entry gets modified.*/
     [LastModified] DATETIME2 NOT NULL DEFAULT getutcdate(), 
+    [IsTaxable] BIT NOT NULL DEFAULT 1, 
 )

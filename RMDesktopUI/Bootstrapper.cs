@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using Caliburn.Micro;
 using RMDesktopUI.Helpers;
 using RMDesktopUI.Library.API;
+using RMDesktopUI.Library.Helpers;
 using RMDesktopUI.Library.Models;
 using RMDesktopUI.ViewModels;
 
@@ -35,6 +36,7 @@ namespace RMDesktopUI
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()  
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
+                .Singleton<IConfigHelper, ConfigHelper>()
                 .Singleton<IAPIHelper, APIHelper>(); // Enables keeping the http-client open
                                                      // until the application gets closed
 

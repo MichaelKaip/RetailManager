@@ -80,3 +80,6 @@
 \contentsline {subsubsection}{\numberline {16.2.3} Connecting from the WPF side}{44}
 \contentsline {section}{\numberline {17}Wiring up WPF Shopping Cart}{46}
 \contentsline {section}{\numberline {18}Modifying SQL, the API and WPF to add Taxes}{49}
+\contentsline {subsection}{\numberline {18.1}Adding a "taxable" flag}{49}
+\contentsline {subsubsection}{\numberline {18.1.1}Adding the tax rate to App.Config}{51}
+\contentsline {subsubsection}{\numberline {18.1.2}Adding a ConfigHelper.cs}{51}
