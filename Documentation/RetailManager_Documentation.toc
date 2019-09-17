@@ -83,3 +83,5 @@
 \contentsline {subsection}{\numberline {18.1}Adding a "taxable" flag}{49}
 \contentsline {subsubsection}{\numberline {18.1.1}Adding the tax rate to App.Config}{51}
 \contentsline {subsubsection}{\numberline {18.1.2}Adding a ConfigHelper.cs}{51}
+\contentsline {section}{\numberline {19}Refactorings}{53}
+\contentsline {subsection}{\numberline {19.1}Adding foreign keys to the database tables}{53}

@@ -4,5 +4,6 @@
     [FirstName] NVARCHAR(50) NOT NULL, 
     [LastName] NVARCHAR(50) NOT NULL, 
     [EmailAdress] NVARCHAR(256) NOT NULL, 
-    [CreatedDate] DATETIME2 NOT NULL DEFAULT getutcdate()
+    [CreatedDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 
+    CONSTRAINT [PK_User] PRIMARY KEY ([Id])
 )
