@@ -646,5 +646,20 @@ And finally updating the NotifyOfPropertyChange for SubTotal, Tax and Total in \
 \boxed{\includegraphics[scale=0.48]{pic144}}
 \end{enumerate}
 
+\subsection{Change the naming related to the Entity Framework database connection}
+\begin{enumerate}
+\item RMDataManager.WebConfig $\to$ DefaultConnection\\\\
+From "DefaultConnection" to \textbf{"EntityFrameworkData"}\\\\
+\boxed{\includegraphics[scale=0.3]{pic145}}\newpage
+\item RMDataManager.Models.IdentityModels.cs\\\\
+\boxed{\includegraphics[scale=0.38]{pic146}}
+\item Migration\\\\
+\boxed{\includegraphics[scale=0.38]{pic147}}
+\item To silence this error first delete the generated class RMDataManager.Migrations.Configuration.cs
+\item Using SWAGGER to re-create the user in the "new" database\\\\
+\boxed{\includegraphics[scale=0.48]{pic148}}
+\item Refreshing database in SQL Server-Object-Explorer will complete the re-naming
+\end{enumerate}
+
 
 \end{document}
