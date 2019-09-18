@@ -64,7 +64,8 @@ namespace RMDesktopUI.ViewModels
 
         private decimal CalculateSubTotal()
         {
-            var subTotal = Cart.Sum(item => (item.Product.RetailPrice * item.QuantityInCart));
+            var subTotal = Cart
+                .Sum(item => (item.Product.RetailPrice * item.QuantityInCart));
 
             return subTotal;
         }
@@ -75,8 +76,9 @@ namespace RMDesktopUI.ViewModels
         {
             var taxRate = (_configHelper.GetTaxRate()/100);
 
-            var taxAmount = Cart.Where(item => item.Product.IsTaxable).Sum(item =>
-                (item.Product.RetailPrice * item.QuantityInCart * (decimal)taxRate));
+            var taxAmount = Cart
+                .Where(item => item.Product.IsTaxable)
+                .Sum(item => (item.Product.RetailPrice * item.QuantityInCart * (decimal)taxRate));
 
             return taxAmount;
         }
