@@ -20,6 +20,7 @@ namespace RMDesktopUI.ViewModels
         private readonly IProductEndPoint _productEndPoint;
         private ProductModel _selectedProduct;
         private readonly IConfigHelper _configHelper;
+        private readonly ISaleEndPoint _saleEndpoint;
 
         /*
          * Public Properties
@@ -78,7 +79,7 @@ namespace RMDesktopUI.ViewModels
 
             var taxAmount = Cart
                 .Where(item => item.Product.IsTaxable)
-                .Sum(item => (item.Product.RetailPrice * item.QuantityInCart * (decimal)taxRate));
+                .Sum(item => (item.Product.RetailPrice * item.QuantityInCart * taxRate));
 
             return taxAmount;
         }
@@ -107,10 +108,12 @@ namespace RMDesktopUI.ViewModels
         /*
          * Constructors
          */
-        public SalesViewModel(IProductEndPoint productEndPoint, IConfigHelper configHelper)
+        public SalesViewModel(IProductEndPoint productEndPoint, IConfigHelper configHelper, 
+            ISaleEndPoint saleEndpoint)
         {
             _productEndPoint = productEndPoint;
             _configHelper = configHelper;
+            _saleEndpoint = saleEndpoint;
         }
 
         /*
@@ -169,6 +172,7 @@ namespace RMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
 
         public bool CanRemoveFromCart
@@ -188,22 +192,39 @@ namespace RMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
 
         public bool CanCheckOut
         {
             get
             {
-                bool output = false;
-
                 // Make sure there is something in the cart
+                var output = Cart.Count > 0;
 
                 return output;
             }
         }
 
-        public void CheckOut()
+        public async Task CheckOut()
         {
+            // Create a SaleModel 
+            SaleModel sale = new SaleModel();
+
+            // Converts the cart from the CartItemModel list over to a SaleModel with an
+            // internal List ofa SaleDetailModel which just holds the ProductId and Quantity
+            // from the Frontend.
+            foreach (var item in Cart)
+            {
+                sale.SaleDetails.Add(new SaleDetailModel
+                {
+                    ProductId = item.Product.Id,
+                    Quantity = item.QuantityInCart
+                });
+            }
+
+            //Post the SaleDetailModel to the API
+            await _saleEndpoint.PostSale(sale);
 
         }
 

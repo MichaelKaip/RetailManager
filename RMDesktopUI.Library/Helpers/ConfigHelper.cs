@@ -5,12 +5,11 @@ namespace RMDesktopUI.Library.Helpers
     public class ConfigHelper : IConfigHelper
     {
         // Reading configuration information from the App.Config
-        public double GetTaxRate() 
+        public decimal GetTaxRate() 
         {
-
             var taxRateText = ConfigurationManager.AppSettings["taxRate"];
 
-            var isValidTaxRate = double.TryParse(taxRateText, out var output);
+            var isValidTaxRate = decimal.TryParse(taxRateText, out var output);
 
             if (isValidTaxRate == false)
             {

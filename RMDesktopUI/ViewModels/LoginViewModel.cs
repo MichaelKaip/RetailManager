@@ -11,8 +11,8 @@ namespace RMDesktopUI.ViewModels
         /*
          * Properties with Backing Fields
          */
-        private string _userName;
-        private string _password;
+        private string _userName = "michael.kaip@gmx.net"; // Todo: Remove hard-coded values
+        private string _password = "Pwd12345.";
         private string _errorMessage;
         private IEventAggregator _events;
 

@@ -666,5 +666,63 @@ From "DefaultConnection" to \textbf{"EntityFrameworkData"}\\\\
 
 \subsection{Improving the SalesView by displaying additional product information}
 \boxed{\includegraphics[scale=0.48]{pic150}}
+\newpage
+
+\section{Posting sales data back to the API}
+The aim of doing this is to save a sale into the databse in order to do the checkout.
+\begin{enumerate}
+\item Adding the taxrate to Web.Config (API)\\\\
+\boxed{\includegraphics[scale=0.48]{pic151}}
+\item Adding a ConfigHelper.cs to \boxed{RMDataManager.Library.Helpers} to pull the tax rate\\\\
+\boxed{\includegraphics[scale=0.415]{pic152}}
+\item Sending the CartItemModel over to the API\\\\
+But only non-critical information (ID and Quantity) should be sent in order to not trust on the API relating to critical information like RetailPrice, SubTotal and Total - because this information could have been manipulated manually.\\\\
+Critical data has to be fetched from the database and re-calculated.
+\begin{enumerate}
+\item Creating a SaleModel.cs and SaleDetailModel.cs \textbf{(from the Frontend-side)} to define the data which is going to post to the API\\\\
+\boxed{\includegraphics[scale=0.415]{pic153}}\\\\
+\boxed{\includegraphics[scale=0.415]{pic154}}
+\item Now CanCheckOut() and CheckOut() in the SalesViewModel can be implemented\\\\
+\boxed{\includegraphics[scale=0.415]{pic155}}\\\\
+Don't forget adding NotifyOfPropertyChange $\to$ CanCheckout to "RemoveFromCart" and "AddToCart"...\\\\
+\textbf{Checkout-Button is active now!!!}\\\\
+\item Creating a new API-Controller in \boxed{RMDataManager.Controllers}\\\\
+\boxed{\includegraphics[scale=0.415]{pic156}}\\\\
+\item Creating a SaleModel.cs and SaleDetailModel.cs \textbf{(from the Backend-side)} to receive the data from Frontend \\\\
+\boxed{\includegraphics[scale=0.415]{pic157}}\\\\
+\boxed{\includegraphics[scale=0.415]{pic158}}\\\\
+\item Creating a SaleEndPoint.cs\\\\
+\boxed{\includegraphics[scale=0.415]{pic159}}\\\\
+\item Creating an Interface and adding it to the Bootstrapper for dependency injection\\\\
+\boxed{\includegraphics[scale=0.415]{pic160}}\\\\
+\item Adding the SaleEndPoint to the constructor of the SalesViewModel and creating a private backing field, which is gonna be initialized from the constructor\\\\
+\boxed{\includegraphics[scale=0.415]{pic161}}\newpage
+\item Implementig the SaleController in order to handle the posted data from the Frontend\\\\
+\boxed{\includegraphics[scale=0.415]{pic162}}
+\begin{enumerate}
+\item Creating a class SaleData.cs in \boxed{RMDataManager.Library.DataAccess}\\\\
+\boxed{\includegraphics[scale=0.415]{pic163}}\\\\
+\boxed{\includegraphics[scale=0.415]{pic164}}\newpage
+\begin{enumerate}
+\item Implementing a Method in \boxed{RMDataManager.Library.DataAccess.ProductData} and a stored procedure for getting the information about products from the database\\\\
+\boxed{\includegraphics[scale=0.415]{pic165}}\\\\
+\boxed{\includegraphics[scale=0.415]{pic166}}
+\item Creating a class ConfigHelper.cs in \boxed{RMDataManager.Library} to get the taxrate\\\\
+\boxed{\includegraphics[scale=0.415]{pic172}}\\\\
+It's reading the taxrate from \textbf{Web.Config}.
+\item Creating a new stored procedure \boxed{spSale\_Insert}\\\\
+\boxed{\includegraphics[scale=0.415]{pic167}}
+\item Creating a new stored procedure \boxed{spSaleDetail\_Insert}\\\\
+\boxed{\includegraphics[scale=0.415]{pic168}}
+\end{enumerate}\newpage
+\item Creating a SaleDetailDBModel in \boxed{RMDataManager.Library.Models}\\\\
+\boxed{\includegraphics[scale=0.415]{pic169}}
+\item Creating a SaleDBModel in \boxed{RMDataManager.Library.Models}\\\\
+\boxed{\includegraphics[scale=0.415]{pic170}}\newpage
+\item Creating a stored procedure \boxed{spSale\_Lookup} for getting the sale id from the table\\\\
+\boxed{\includegraphics[scale=0.415]{pic171}}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
 
 \end{document}

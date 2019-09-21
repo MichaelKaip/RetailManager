@@ -220,6 +220,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -228,6 +229,8 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SaleDetailModel.cs" />
+    <Compile Include="Models\SaleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -325,6 +328,10 @@
     <ProjectReference Include="..\RMDataManager.Library\RMDataManager.Library.csproj">
       <Project>{5209F7D6-965E-4154-96C7-92C86726B3BA}</Project>
       <Name>RMDataManager.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RMDesktopUI.Library\RMDesktopUI.Library.csproj">
+      <Project>{607B4A77-ABF1-40A3-9A4D-EFCD07363613}</Project>
+      <Name>RMDesktopUI.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

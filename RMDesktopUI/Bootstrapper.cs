@@ -30,15 +30,15 @@ namespace RMDesktopUI
         protected override void Configure()
         {
             _container.Instance(_container)
-                .PerRequest<IProductEndPoint, ProductEndPoint>();
+                .PerRequest<IProductEndPoint, ProductEndPoint>()
+                .PerRequest<ISaleEndPoint, SaleEndPoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()  
                 .Singleton<ILoggedInUserModel, LoggedInUserModel>()
                 .Singleton<IConfigHelper, ConfigHelper>()
-                .Singleton<IAPIHelper, APIHelper>(); // Enables keeping the http-client open
-                                                     // until the application gets closed
+                .Singleton<IAPIHelper, APIHelper>(); // Enables keeping the http-client open until the application gets closed
 
             // Connecting the ViewModel to the Views using reflection
             GetType().Assembly.GetTypes()
