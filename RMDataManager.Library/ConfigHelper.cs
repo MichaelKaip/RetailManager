@@ -12,7 +12,7 @@ namespace RMDataManager.Library
 
             if (isValidTaxRate == false)
             {
-                throw new ConfigurationErrorsException("The tax rat is not set properly in App.Config");
+                throw new ConfigurationErrorsException("The tax rate is not set properly in App.Config");
             }
 
             return output;

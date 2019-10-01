@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Caliburn.Micro;
 using RMDesktopUI.Library.API;
 using RMDesktopUI.Library.Helpers;
 using RMDesktopUI.Library.Models;
+using RMDesktopUI.Models;
 
 namespace RMDesktopUI.ViewModels
 {
@@ -14,18 +17,19 @@ namespace RMDesktopUI.ViewModels
         /*
          * Private backing fields
          */
-        private BindingList<ProductModel> _products;
+        private BindingList<ProductDisplayModel> _products;
         private int _itemQuantity = 1;
-        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();
+        private BindingList<CartItemDisplayModel> _cart = new BindingList<CartItemDisplayModel>();
         private readonly IProductEndPoint _productEndPoint;
-        private ProductModel _selectedProduct;
+        private ProductDisplayModel _selectedProduct;
         private readonly IConfigHelper _configHelper;
         private readonly ISaleEndPoint _saleEndpoint;
+        private IMapper _mapper;
 
         /*
          * Public Properties
          */
-        public BindingList<ProductModel> Products
+        public BindingList<ProductDisplayModel> Products
         {
             get => _products;
             set
@@ -35,7 +39,7 @@ namespace RMDesktopUI.ViewModels
             }
         }
 
-        public ProductModel SelectedProduct
+        public ProductDisplayModel SelectedProduct
         {
             get => _selectedProduct;
             set
@@ -95,7 +99,7 @@ namespace RMDesktopUI.ViewModels
         }
 
 
-        public BindingList<CartItemModel> Cart
+        public BindingList<CartItemDisplayModel> Cart
         {
             get => _cart;
             set
@@ -109,11 +113,13 @@ namespace RMDesktopUI.ViewModels
          * Constructors
          */
         public SalesViewModel(IProductEndPoint productEndPoint, IConfigHelper configHelper, 
-            ISaleEndPoint saleEndpoint)
+            ISaleEndPoint saleEndpoint, IMapper mapper)
         {
             _productEndPoint = productEndPoint;
             _configHelper = configHelper;
             _saleEndpoint = saleEndpoint;
+            _mapper = mapper;
+
         }
 
         /*
@@ -128,7 +134,8 @@ namespace RMDesktopUI.ViewModels
         private async Task LoadProducts()
         {
             var productList = await _productEndPoint.GetAll();
-            Products = new BindingList<ProductModel>(productList);
+            var products = _mapper.Map<List<ProductDisplayModel>>(productList);
+            Products = new BindingList<ProductDisplayModel>(products);
         }
 
         public bool CanAddToCart
@@ -144,21 +151,17 @@ namespace RMDesktopUI.ViewModels
 
         public void AddToCart()
         {
-            CartItemModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
+            CartItemDisplayModel existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
 
             // Either updating the quantity of an existing item in cart
             // or adding a new item.
             if (existingItem != null)
             {
                 existingItem.QuantityInCart += ItemQuantity;
-
-                // Not the best solution - it's just tricking the system to update the list.
-                Cart.Remove(existingItem);
-                Cart.Add(existingItem);
             }
             else
             {
-                var item = new CartItemModel
+                var item = new CartItemDisplayModel
                 {
                     Product = SelectedProduct,
                     QuantityInCart = ItemQuantity
@@ -211,7 +214,7 @@ namespace RMDesktopUI.ViewModels
             // Create a SaleModel 
             SaleModel sale = new SaleModel();
 
-            // Converts the cart from the CartItemModel list over to a SaleModel with an
+            // Converts the cart from the CartItemDisplayModel list over to a SaleModel with an
             // internal List ofa SaleDetailModel which just holds the ProductId and Quantity
             // from the Frontend.
             foreach (var item in Cart)
