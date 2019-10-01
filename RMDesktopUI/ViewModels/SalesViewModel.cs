@@ -24,6 +24,7 @@ namespace RMDesktopUI.ViewModels
         private ProductDisplayModel _selectedProduct;
         private readonly IConfigHelper _configHelper;
         private readonly ISaleEndPoint _saleEndpoint;
+        private CartItemDisplayModel _selectedCartItem;
         private IMapper _mapper;
 
         /*
@@ -47,6 +48,17 @@ namespace RMDesktopUI.ViewModels
                 _selectedProduct = value;
                 NotifyOfPropertyChange(() => SelectedProduct);
                 NotifyOfPropertyChange(() => CanAddToCart);
+            }
+        }
+
+        public CartItemDisplayModel SelectedCartItem
+        {
+            get => _selectedCartItem;
+            set
+            {
+                _selectedCartItem = value;
+                NotifyOfPropertyChange(() => _selectedCartItem);
+                NotifyOfPropertyChange(() => CanRemoveFromCart);
             }
         }
 
@@ -182,9 +194,8 @@ namespace RMDesktopUI.ViewModels
         {
             get
             {
-                bool output = false;
-
-                // Todo: Make sure something is selected
+                // Make sure something is selected
+                var output = SelectedCartItem != null && SelectedCartItem?.Product.QuantityInStock > 0;
 
                 return output;
             }
@@ -192,6 +203,17 @@ namespace RMDesktopUI.ViewModels
 
         public void RemoveFromCart()
         {
+            SelectedCartItem.Product.QuantityInStock += 1;
+
+            if (SelectedCartItem.QuantityInCart > 1)
+            {
+                SelectedCartItem.QuantityInCart -= 1;
+            }
+            else
+            {
+                Cart.Remove(SelectedCartItem);
+            }
+
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
