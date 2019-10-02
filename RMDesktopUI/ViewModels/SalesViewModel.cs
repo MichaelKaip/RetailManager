@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ namespace RMDesktopUI.ViewModels
         private readonly IConfigHelper _configHelper;
         private readonly ISaleEndPoint _saleEndpoint;
         private CartItemDisplayModel _selectedCartItem;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         /*
          * Public Properties
@@ -150,6 +149,18 @@ namespace RMDesktopUI.ViewModels
             Products = new BindingList<ProductDisplayModel>(products);
         }
 
+        private async Task ResetSalesViewModel()
+        {
+            Cart = new BindingList<CartItemDisplayModel>();
+
+            await LoadProducts();
+
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
+        }
+
         public bool CanAddToCart
         {
             get
@@ -195,7 +206,7 @@ namespace RMDesktopUI.ViewModels
             get
             {
                 // Make sure something is selected
-                var output = SelectedCartItem != null && SelectedCartItem?.Product.QuantityInStock > 0;
+                var output = SelectedCartItem != null && SelectedCartItem?.QuantityInCart > 0;
 
                 return output;
             }
@@ -218,6 +229,7 @@ namespace RMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
             NotifyOfPropertyChange(() => CanCheckOut);
+            NotifyOfPropertyChange(() => CanAddToCart);
         }
 
         public bool CanCheckOut
@@ -250,6 +262,8 @@ namespace RMDesktopUI.ViewModels
 
             //Post the SaleDetailModel to the API
             await _saleEndpoint.PostSale(sale);
+
+            await ResetSalesViewModel();
 
         }
 
