@@ -16,6 +16,8 @@ namespace RMDataManager.Library.Internal.DataAccess
      */
     internal class SqlDataAccess : IDisposable
     {
+        private bool isClosed = false;
+
         // Gets the connection string with the matching name from WebConfig
         // (DefaultConnection) and returns it back.
         public string GetConnectionString(string name)
@@ -61,6 +63,8 @@ namespace RMDataManager.Library.Internal.DataAccess
             _connection.Open();
 
             _transaction = _connection.BeginTransaction();
+
+            isClosed = false;
         }
 
         public List<T> LoadDataInTransaction<T, U>(string storedProcedure, U parameters)
@@ -83,18 +87,33 @@ namespace RMDataManager.Library.Internal.DataAccess
         {
             _transaction?.Commit();
             _connection?.Close();
+            isClosed = true;
         }
 
-        // Rollback transaction in case of failing
+        // Rollback transaction in case of something fails
         public void RollbackTransaction()
         {
             _transaction?.Rollback();
             _connection?.Close();
+            isClosed = true;
         }
 
         public void Dispose()
         {
-            CommitTransaction();
+            if (isClosed == false) 
+            {
+                try
+                {
+                    CommitTransaction();
+                }
+                catch
+                {
+                    // Todo: Log this issue
+                }
+            }
+
+            _transaction = null;
+            _connection = null;
         }
     }
 }
