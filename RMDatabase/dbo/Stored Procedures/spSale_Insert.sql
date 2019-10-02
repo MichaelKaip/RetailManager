@@ -13,5 +13,5 @@ begin
 	values(@CashierId, @SaleDate, @SubTotal, @Tax, @Total);
 
 	/*Graps the last identity which has been created inside of this transaction*/
-	select @Id = @@Identity;
+	select @Id = SCOPE_IDENTITY();
 end
