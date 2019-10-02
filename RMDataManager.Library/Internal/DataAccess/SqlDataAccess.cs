@@ -55,7 +55,9 @@ namespace RMDataManager.Library.Internal.DataAccess
         // Open Connection / Start Transaction 
         public void StartTransaction(string connectionStringName)
         {
-            _connection = new SqlConnection();
+            string connectionString = GetConnectionString(connectionStringName);
+
+            _connection = new SqlConnection(connectionString);
             _connection.Open();
 
             _transaction = _connection.BeginTransaction();
@@ -64,9 +66,8 @@ namespace RMDataManager.Library.Internal.DataAccess
         public List<T> LoadDataInTransaction<T, U>(string storedProcedure, U parameters)
         {
             // Connects the database, makes a query and returns back a set of rows.
-                var rows = _connection
-                    .Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure, 
-                        transaction: _transaction).ToList();
+                var rows = _connection.Query<T>(storedProcedure, parameters, 
+                    commandType: CommandType.StoredProcedure, transaction: _transaction).ToList();
 
                 return rows;
         }
@@ -81,21 +82,15 @@ namespace RMDataManager.Library.Internal.DataAccess
         public void CommitTransaction()
         {
             _transaction?.Commit();
+            _connection?.Close();
         }
 
         // Rollback transaction in case of failing
         public void RollbackTransaction()
         {
             _transaction?.Rollback();
-            _connection.Close();
+            _connection?.Close();
         }
-        // Load using the transaction
-
-        // Save using the transaction
-
-        // Close transaction / Stop Transaction Method()
-
-        // Dispose
 
         public void Dispose()
         {

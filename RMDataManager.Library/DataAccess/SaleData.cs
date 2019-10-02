@@ -82,6 +82,7 @@ namespace RMDataManager.Library.DataAccess
                 catch
                 {
                     sql.RollbackTransaction();
+                    throw;
                 }
             }
         }
