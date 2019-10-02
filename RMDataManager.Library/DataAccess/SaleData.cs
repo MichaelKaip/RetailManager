@@ -55,22 +55,34 @@ namespace RMDataManager.Library.DataAccess
 
             sale.Total = sale.SubTotal + sale.Tax;
 
-            // 4. Save the sale model to the database
-            SqlDataAccess sql = new SqlDataAccess();
-            sql.SaveData("spSale_Insert", sale, "RMDatabase");
-
-            // 5.) Getting the sale id
-            sale.Id = sql.LoadData<int, dynamic>(
-                "spSale_Lookup", new {sale.CashierId, sale.SaleDate}, 
-                "RMDatabase").FirstOrDefault();
-
-            // 6.) Finish filling in the SaleDetailModel and Save the sale detail models
-            foreach (var item in details)
+            using (SqlDataAccess sql = new SqlDataAccess())
             {
-                item.SaleId = sale.Id;
-                // In cases where the database is going to be called thousands of times,
-                // it's possible to use "table value parameters" here instead and save the whole table.
-                sql.SaveData("dbo.spSaleDetail_Insert", item, "RMDatabase");
+                try
+                {
+                    sql.StartTransaction("RMDatabase");
+
+                    // 4. Save the sale model to the database
+                    sql.SaveDataInTransaction("dbo.spSale_Insert", sale);
+
+                    // 5.) Getting the sale id
+                    sale.Id = sql.LoadDataInTransaction<int, dynamic>(
+                        "spSale_Lookup", new { sale.CashierId, sale.SaleDate }).FirstOrDefault();
+
+                    // 6.) Finish filling in the SaleDetailModel and Save the sale detail models
+                    foreach (var item in details)
+                    {
+                        item.SaleId = sale.Id;
+                        // In cases where the database is going to be called thousands of times,
+                        // it's possible to use "table value parameters" here instead and save the whole table.
+                        sql.SaveDataInTransaction("dbo.spSaleDetail_Insert", item);
+                    }
+
+                    sql.CommitTransaction();
+                }
+                catch
+                {
+                    sql.RollbackTransaction();
+                }
             }
         }
     }
